@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -17,6 +19,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         //version checker runs first
         checkVersion();
+        if(savedInstanceState != null) {
+            RatingBar cr = findViewById(R.id.cStar);
+            cr.setRating(savedInstanceState.getFloat("cubeRating"));
+            Toast.makeText(this, "worked", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+        }
+
         //Implement onClick/Intents for images
         onImgClick();
 
@@ -43,10 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-
+        //set ratings if they exist
+        RatingBar cr = findViewById(R.id.cStar);
+        cr.setRating(savedInstanceState.getFloat("cubeRating"));
+        Toast.makeText(this, "worked", Toast.LENGTH_SHORT).show();
     }
 
     // set OR for onClick
@@ -63,15 +76,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void onImgClick() {
+    public void onImgClick() {
         ImageView cube = findViewById(R.id.imvCube);
-            cube.setOnClickListener(this);
+        cube.setOnClickListener(this);
         ImageView candle = findViewById(R.id.imvCand);
-            candle.setOnClickListener(this);
+        candle.setOnClickListener(this);
         ImageView call = findViewById(R.id.imvCall);
-            call.setOnClickListener(this);
+        call.setOnClickListener(this);
         ImageView ameth = findViewById(R.id.ameth);
-            ameth.setOnClickListener(this);
+        ameth.setOnClickListener(this);
     }
 
 }
