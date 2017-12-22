@@ -1,12 +1,15 @@
 package com.example.cpera.storefront;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,8 +17,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //version checker runs first
         checkVersion();
-        //
+        //Implement onClick/Intents for images
+        onImgClick();
 
+    }
+
+    // set OR for onClick
+    @Override
+    public void onClick(View v) {
+    Intent intent = new Intent();
+        if (v.getId() == R.id.imvCube) {
+            intent = new Intent(this, cubeActivity.class);
+        } else if (v.getId() == R.id.imvCand) {
+            intent = new Intent(this, cubeActivity.class);
+        } else if (v.getId() == R.id.imvCall) {
+            intent = new Intent(this, cubeActivity.class);
+        } else if (v.getId() == R.id.ameth) {
+            intent = new Intent(this, cubeActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    private void onImgClick() {
+        ImageView cube = findViewById(R.id.imvCube);
+            cube.setOnClickListener(this);
+        ImageView candle = findViewById(R.id.imvCand);
+            candle.setOnClickListener(this);
+        ImageView call = findViewById(R.id.imvCall);
+            call.setOnClickListener(this);
+        ImageView ameth = findViewById(R.id.ameth);
+            ameth.setOnClickListener(this);
     }
 
     private void checkVersion() {
