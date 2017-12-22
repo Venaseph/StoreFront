@@ -22,20 +22,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+
     // set OR for onClick
     @Override
     public void onClick(View v) {
-    Intent intent = new Intent();
         if (v.getId() == R.id.imvCube) {
-            intent = new Intent(this, cubeActivity.class);
+            startActivity(new Intent(this, cubeActivity.class));
         } else if (v.getId() == R.id.imvCand) {
-            intent = new Intent(this, candleActivity.class);
+            startActivity(new Intent(this, candleActivity.class));
         } else if (v.getId() == R.id.imvCall) {
-            intent = new Intent(this, callActivity.class);
+            startActivity(new Intent(this, callActivity.class));
         } else if (v.getId() == R.id.ameth) {
-            intent = new Intent(this, amethActivity.class);
+            startActivity(new Intent(this, amethActivity.class));
         }
-        startActivity(intent);
     }
 
     private void onImgClick() {
