@@ -17,7 +17,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".cubeActivity"
+        <!-- added upNav for each activity -->
+        <activity
+            android:name=".cubeActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".candleActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".callActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".amethActivity"
             android:parentActivityName=".MainActivity">
         </activity>
     </application>

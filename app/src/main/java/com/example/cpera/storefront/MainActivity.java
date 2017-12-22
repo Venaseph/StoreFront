@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.imvCube) {
             intent = new Intent(this, cubeActivity.class);
         } else if (v.getId() == R.id.imvCand) {
-            intent = new Intent(this, cubeActivity.class);
+            intent = new Intent(this, candleActivity.class);
         } else if (v.getId() == R.id.imvCall) {
-            intent = new Intent(this, cubeActivity.class);
+            intent = new Intent(this, callActivity.class);
         } else if (v.getId() == R.id.ameth) {
-            intent = new Intent(this, cubeActivity.class);
+            intent = new Intent(this, amethActivity.class);
         }
         startActivity(intent);
     }
