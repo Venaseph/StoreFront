@@ -57,6 +57,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:progressTint="@color/starColor"
         app:layout_constraintBottom_toBottomOf="@+id/imvCube"
         app:layout_constraintStart_toEndOf="@+id/imvCube"
         app:layout_constraintTop_toBottomOf="@+id/cFlav" />
@@ -129,6 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:progressTint="@color/starColor"
         app:layout_constraintStart_toEndOf="@+id/imvCand"
         app:layout_constraintTop_toBottomOf="@+id/candFlav" />
 
@@ -164,12 +166,13 @@
         app:layout_constraintTop_toBottomOf="@+id/callDesc" />
 
     <RatingBar
-        android:id="@+id/ratingBar10"
+        android:id="@+id/callStar"
         style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:progressTint="@color/starColor"
         app:layout_constraintStart_toEndOf="@+id/imvCall"
         app:layout_constraintTop_toBottomOf="@+id/callFlav" />
 
@@ -231,9 +234,9 @@
         android:id="@+id/imageView10"
         android:layout_width="23dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar10"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/callStar"
         app:layout_constraintTop_toBottomOf="@+id/callFlav"
         app:srcCompat="@drawable/dust" />
 
@@ -269,12 +272,13 @@
         app:layout_constraintTop_toBottomOf="@+id/amTitle" />
 
     <RatingBar
-        android:id="@+id/ratingBar11"
+        android:id="@+id/amethStar"
         style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:progressTint="@color/starColor"
         app:layout_constraintStart_toEndOf="@+id/ameth"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -284,7 +288,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar11"
+        app:layout_constraintStart_toEndOf="@+id/amethStar"
         app:layout_constraintTop_toBottomOf="@+id/textView18"
         app:srcCompat="@drawable/dust" />
 

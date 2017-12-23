@@ -19,17 +19,13 @@
         </activity>
         <!-- added upNav for each activity -->
         <activity
-            android:name=".cubeActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".cubeActivity"/>
         <activity
-            android:name=".candleActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".candleActivity" />
         <activity
-            android:name=".callActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".callActivity"/>
         <activity
-            android:name=".amethActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".amethActivity">
         </activity>
     </application>
 

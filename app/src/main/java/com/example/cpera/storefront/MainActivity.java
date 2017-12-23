@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //both for onActivityResult handling
+    private static final int SECOND_ACTIVITY_RESULT_CODE = 0;
+    private int num = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,18 +22,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         //version checker runs first
         checkVersion();
-        if(savedInstanceState != null) {
-            RatingBar cr = findViewById(R.id.cStar);
-            cr.setRating(savedInstanceState.getFloat("cubeRating"));
-            Toast.makeText(this, "worked", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
-        }
-
         //Implement onClick/Intents for images
         onImgClick();
 
     }
+
+    //I could not for the life of me figure out correct bundle useage to make this work so you get onActivityResult instead
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == SECOND_ACTIVITY_RESULT_CODE) {
+            //make sure it's coming from the right page
+            if (resultCode == RESULT_OK) {
+                // which page determines which stars
+                if(num == 1) {
+                    // get String data from Intent
+                    String value = data.getStringExtra("cubeStar");
+                    Float num = Float.parseFloat(value);
+                    RatingBar cube = findViewById(R.id.cStar);
+                    cube.setRating(num);
+                } else if(num == 2) {
+                    String value = data.getStringExtra("candStar");
+                    Float num = Float.parseFloat(value);
+                    RatingBar cand = findViewById(R.id.candStar);
+                    cand.setRating(num);
+                } else if(num == 3) {
+                    String value = data.getStringExtra("callStar");
+                    Float num = Float.parseFloat(value);
+                    RatingBar call = findViewById(R.id.callStar);
+                    call.setRating(num);
+                } else if(num == 4) {
+                    String value = data.getStringExtra("amethStar");
+                    Float num = Float.parseFloat(value);
+                    RatingBar ameth = findViewById(R.id.amethStar);
+                    ameth.setRating(num);
+                }
+            }
+        }
+    }
+
     private void checkVersion() {
         int sdkVersion = Build.VERSION.SDK_INT;
         if (sdkVersion < 20) {
@@ -53,37 +85,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        //set ratings if they exist
-        RatingBar cr = findViewById(R.id.cStar);
-        cr.setRating(savedInstanceState.getFloat("cubeRating"));
-        Toast.makeText(this, "worked", Toast.LENGTH_SHORT).show();
-    }
-
-    // set OR for onClick
-    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imvCube) {
-            startActivity(new Intent(this, cubeActivity.class));
+            Intent intent = new Intent(this, cubeActivity.class);
+            num = 1;
+            startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
+            //startActivity(new Intent(this, cubeActivity.class));
         } else if (v.getId() == R.id.imvCand) {
-            startActivity(new Intent(this, candleActivity.class));
+            Intent intent = new Intent(this, candleActivity.class);
+            num = 2;
+            startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
         } else if (v.getId() == R.id.imvCall) {
-            startActivity(new Intent(this, callActivity.class));
+            Intent intent = new Intent(this, callActivity.class);
+            num = 3;
+            startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
         } else if (v.getId() == R.id.ameth) {
-            startActivity(new Intent(this, amethActivity.class));
+            Intent intent = new Intent(this, amethActivity.class);
+            num = 4;
+            startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
         }
     }
 
-    public void onImgClick() {
-        ImageView cube = findViewById(R.id.imvCube);
+    private void onImgClick() {
+        final ImageView cube = findViewById(R.id.imvCube);
         cube.setOnClickListener(this);
-        ImageView candle = findViewById(R.id.imvCand);
+        final ImageView candle = findViewById(R.id.imvCand);
         candle.setOnClickListener(this);
-        ImageView call = findViewById(R.id.imvCall);
+        final ImageView call = findViewById(R.id.imvCall);
         call.setOnClickListener(this);
-        ImageView ameth = findViewById(R.id.ameth);
+        final ImageView ameth = findViewById(R.id.ameth);
         ameth.setOnClickListener(this);
     }
 
