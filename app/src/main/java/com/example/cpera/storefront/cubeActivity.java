@@ -19,11 +19,9 @@ public class cubeActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String csr = String.valueOf(cubeStar.getRating());
-                //startActivity(new Intent(cubeActivity.this, MainActivity.class).putExtra("cubeStar",csr));
-                Intent intent = new Intent();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("cubeStar", csr);
-                setResult(RESULT_OK, intent);
-                finish();
+                startActivity(intent);
             }
         });
     }

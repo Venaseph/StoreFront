@@ -19,10 +19,9 @@ public class candleActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String csr = String.valueOf(candStar.getRating());
-                Intent intent = new Intent();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("candStar", csr);
-                setResult(RESULT_OK, intent);
-                finish();
+                startActivity(intent);
             }
         });
     }

@@ -19,10 +19,9 @@ public class amethActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String csr = String.valueOf(amethStar.getRating());
-                Intent intent = new Intent();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("amethStar", csr);
-                setResult(RESULT_OK, intent);
-                finish();
+                startActivity(intent);
             }
         });
     }

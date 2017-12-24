@@ -13,8 +13,6 @@ import android.widget.RatingBar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //both for onActivityResult handling
-    private static final int SECOND_ACTIVITY_RESULT_CODE = 0;
-    private int num = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,41 +22,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkVersion();
         //Implement onClick/Intents for images
         onImgClick();
+        bundleStuff();
 
     }
 
-    //I could not for the life of me figure out correct bundle useage to make this work so you get onActivityResult instead
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private void bundleStuff() {
+        String string;
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.getString("cubeStar") != null) {
+                string = extras.getString("cubeStar");
+                float stars = Float.parseFloat(string);
+                RatingBar cStar = findViewById(R.id.cubeStar);
+                cStar.setRating(stars);
+            }
 
-        // check that it is the SecondActivity with an OK result
-        if (requestCode == SECOND_ACTIVITY_RESULT_CODE) {
-            //make sure it's coming from the right page
-            if (resultCode == RESULT_OK) {
-                // which page determines which stars
-                if(num == 1) {
-                    // get String data from Intent
-                    String value = data.getStringExtra("cubeStar");
-                    Float num = Float.parseFloat(value);
-                    RatingBar cube = findViewById(R.id.cStar);
-                    cube.setRating(num);
-                } else if(num == 2) {
-                    String value = data.getStringExtra("candStar");
-                    Float num = Float.parseFloat(value);
-                    RatingBar cand = findViewById(R.id.candStar);
-                    cand.setRating(num);
-                } else if(num == 3) {
-                    String value = data.getStringExtra("callStar");
-                    Float num = Float.parseFloat(value);
-                    RatingBar call = findViewById(R.id.callStar);
-                    call.setRating(num);
-                } else if(num == 4) {
-                    String value = data.getStringExtra("amethStar");
-                    Float num = Float.parseFloat(value);
-                    RatingBar ameth = findViewById(R.id.amethStar);
-                    ameth.setRating(num);
-                }
+            if (extras.getString("candStar") != null) {
+                string = extras.getString("candStar");
+                float stars = Float.parseFloat(string);
+                RatingBar cStar = findViewById(R.id.candStar);
+                cStar.setRating(stars);
+            }
+
+            if (extras.getString("callStar") != null) {
+                string = extras.getString("callStar");
+                float stars = Float.parseFloat(string);
+                RatingBar cStar = findViewById(R.id.callStar);
+                cStar.setRating(stars);
+            }
+
+            if (extras.getString("amethStar") != null) {
+                string = extras.getString("amethStar");
+                float stars = Float.parseFloat(string);
+                RatingBar cStar = findViewById(R.id.amethStar);
+                cStar.setRating(stars);
             }
         }
     }
@@ -87,22 +84,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imvCube) {
-            Intent intent = new Intent(this, cubeActivity.class);
-            num = 1;
-            startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
-            //startActivity(new Intent(this, cubeActivity.class));
+            startActivity(new Intent(this, cubeActivity.class));
         } else if (v.getId() == R.id.imvCand) {
-            Intent intent = new Intent(this, candleActivity.class);
-            num = 2;
-            startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
+            startActivity(new Intent(this, candleActivity.class));
         } else if (v.getId() == R.id.imvCall) {
-            Intent intent = new Intent(this, callActivity.class);
-            num = 3;
-            startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
+            startActivity(new Intent(this, callActivity.class));
         } else if (v.getId() == R.id.ameth) {
-            Intent intent = new Intent(this, amethActivity.class);
-            num = 4;
-            startActivityForResult(intent, SECOND_ACTIVITY_RESULT_CODE);
+            startActivity(new Intent(this, amethActivity.class));
         }
     }
 
