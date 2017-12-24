@@ -20,10 +20,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //version checker runs first
         checkVersion();
-        //Implement onClick/Intents for images
+        //Implement onClick listeners for IMGs
         onImgClick();
         //Deal with bundle if returning
         bundleStuff();
+    }
+
+    private void checkVersion() {
+        int sdkVersion = Build.VERSION.SDK_INT;
+        if (sdkVersion < 20) {
+            //create alert to be nice
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(false)
+                    .setTitle("Unsupported Version")
+                    .setMessage("Please update to run Hearth Market")
+                    .setNeutralButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //close Activity on OK click
+                                    MainActivity.this.finish();
+                                }
+                            });
+            final AlertDialog alert = builder.create();
+            alert.show();
+            //building doesn't actually create the dialog, so you do after it's set
+        }
+    }
+
+    private void onImgClick() {
+        final ImageView cube = findViewById(R.id.imvCube);
+        cube.setOnClickListener(this);
+        final ImageView candle = findViewById(R.id.imvCand);
+        candle.setOnClickListener(this);
+        final ImageView call = findViewById(R.id.imvCall);
+        call.setOnClickListener(this);
+        final ImageView ameth = findViewById(R.id.ameth);
+        ameth.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.imvCube) {
+            startActivity(new Intent(this, cubeActivity.class));
+        } else if (v.getId() == R.id.imvCand) {
+            startActivity(new Intent(this, candleActivity.class));
+        } else if (v.getId() == R.id.imvCall) {
+            startActivity(new Intent(this, callActivity.class));
+        } else if (v.getId() == R.id.ameth) {
+            startActivity(new Intent(this, amethActivity.class));
+        }
     }
 
     private void bundleStuff() {
@@ -58,51 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 cStar.setRating(stars);
             }
         }
-    }
-
-    private void checkVersion() {
-        int sdkVersion = Build.VERSION.SDK_INT;
-        if (sdkVersion < 20) {
-            //create alert to be nice
-            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(false)
-                    .setTitle("Unsupported Version")
-                    .setMessage("Please update to run Hearth Market")
-                    .setNeutralButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //close Activity on OK click
-                                    MainActivity.this.finish();
-                                }
-                            });
-            final AlertDialog alert = builder.create();
-            alert.show();
-            //building doesn't actually create the dialog, so you do after it's set
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.imvCube) {
-            startActivity(new Intent(this, cubeActivity.class));
-        } else if (v.getId() == R.id.imvCand) {
-            startActivity(new Intent(this, candleActivity.class));
-        } else if (v.getId() == R.id.imvCall) {
-            startActivity(new Intent(this, callActivity.class));
-        } else if (v.getId() == R.id.ameth) {
-            startActivity(new Intent(this, amethActivity.class));
-        }
-    }
-
-    private void onImgClick() {
-        final ImageView cube = findViewById(R.id.imvCube);
-        cube.setOnClickListener(this);
-        final ImageView candle = findViewById(R.id.imvCand);
-        candle.setOnClickListener(this);
-        final ImageView call = findViewById(R.id.imvCall);
-        call.setOnClickListener(this);
-        final ImageView ameth = findViewById(R.id.ameth);
-        ameth.setOnClickListener(this);
     }
 
     @Override
@@ -140,7 +140,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             RatingBar ameth = findViewById(R.id.cubeStar);
             ameth.setRating(savedInstanceState.getFloat("r1"));
         }
-
     }
-
 }
