@@ -15,12 +15,11 @@ public class amethActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ameth);
 
         final RatingBar amethStar = findViewById(R.id.amethBar);
-        Button back = findViewById(R.id.back);
+        final Button back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String csr = String.valueOf(amethStar.getRating());
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("amethStar", csr);
+                intent.putExtra("amethStar", amethStar.getRating());
                 startActivity(intent);
             }
         });

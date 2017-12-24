@@ -15,12 +15,11 @@ public class cubeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cube);
 
         final RatingBar cubeStar = findViewById(R.id.cubeBar);
-        Button back = findViewById(R.id.back);
+        final Button back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String csr = String.valueOf(cubeStar.getRating());
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("cubeStar", csr);
+                intent.putExtra("cubeStar", cubeStar.getRating());
                 startActivity(intent);
             }
         });

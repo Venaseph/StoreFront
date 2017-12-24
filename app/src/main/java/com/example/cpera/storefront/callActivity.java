@@ -15,12 +15,11 @@ public class callActivity extends AppCompatActivity {
         setContentView(R.layout.activity_call);
 
         final RatingBar callStar = findViewById(R.id.callBar);
-        Button back = findViewById(R.id.back);
+        final Button back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String csr = String.valueOf(callStar.getRating());
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("callStar", csr);
+                intent.putExtra("callStar", callStar.getRating());
                 startActivity(intent);
             }
         });

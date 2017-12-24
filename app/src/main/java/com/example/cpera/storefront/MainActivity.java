@@ -72,35 +72,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void bundleStuff() {
-        String string;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if (extras.getString("cubeStar") != null) {
-                string = extras.getString("cubeStar");
-                float stars = Float.parseFloat(string);
+            if (extras.getFloat("cubeStar") != 0) {
                 RatingBar cStar = findViewById(R.id.cubeStar);
-                cStar.setRating(stars);
+                cStar.setRating(extras.getFloat("cubeStar"));
             }
 
-            if (extras.getString("candStar") != null) {
-                string = extras.getString("candStar");
-                float stars = Float.parseFloat(string);
-                RatingBar cStar = findViewById(R.id.candStar);
-                cStar.setRating(stars);
+            if (extras.getFloat("candStar") != 0) {
+                RatingBar candStar = findViewById(R.id.candStar);
+                candStar.setRating(extras.getFloat("candStar"));
             }
 
-            if (extras.getString("callStar") != null) {
-                string = extras.getString("callStar");
-                float stars = Float.parseFloat(string);
-                RatingBar cStar = findViewById(R.id.callStar);
-                cStar.setRating(stars);
+            if (extras.getFloat("callStar") != 0) {
+                RatingBar callStar = findViewById(R.id.callStar);
+                callStar.setRating(extras.getFloat("callStar"));
             }
 
-            if (extras.getString("amethStar") != null) {
-                string = extras.getString("amethStar");
-                float stars = Float.parseFloat(string);
-                RatingBar cStar = findViewById(R.id.amethStar);
-                cStar.setRating(stars);
+            if (extras.getFloat("amethStar") != 0) {
+                RatingBar amethStar = findViewById(R.id.amethStar);
+                amethStar.setRating(extras.getFloat("amethStar"));
             }
         }
     }
