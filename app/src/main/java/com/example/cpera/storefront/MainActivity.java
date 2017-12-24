@@ -12,18 +12,18 @@ import android.widget.RatingBar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //both for onActivityResult handling
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //version checker runs first
         checkVersion();
         //Implement onClick/Intents for images
         onImgClick();
+        //Deal with bundle if returning
         bundleStuff();
-
     }
 
     private void bundleStuff() {
@@ -103,6 +103,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         call.setOnClickListener(this);
         final ImageView ameth = findViewById(R.id.ameth);
         ameth.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        RatingBar cube = findViewById(R.id.cubeStar);
+        RatingBar cand = findViewById(R.id.candStar);
+        RatingBar call = findViewById(R.id.callStar);
+        RatingBar ameth = findViewById(R.id.amethStar);
+
+        outState.putFloat("r1", cube.getRating());
+        outState.putFloat("r2", cand.getRating());
+        outState.putFloat("r3", call.getRating());
+        outState.putFloat("r4", ameth.getRating());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState.getString("r1") != null) {
+            RatingBar cube = findViewById(R.id.cubeStar);
+            cube.setRating(savedInstanceState.getFloat("r1"));
+        }
+        if (savedInstanceState.getString("r2") != null) {
+            RatingBar cand = findViewById(R.id.candStar);
+            cand.setRating(savedInstanceState.getFloat("r1"));
+        }
+        if (savedInstanceState.getString("r3") != null) {
+            RatingBar call = findViewById(R.id.cubeStar);
+            call.setRating(savedInstanceState.getFloat("r1"));
+        }
+        if (savedInstanceState.getString("r4") != null) {
+            RatingBar ameth = findViewById(R.id.cubeStar);
+            ameth.setRating(savedInstanceState.getFloat("r1"));
+        }
+
     }
 
 }
