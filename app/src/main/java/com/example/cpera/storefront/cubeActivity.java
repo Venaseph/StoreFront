@@ -9,21 +9,43 @@ import android.widget.RatingBar;
 
 public class cubeActivity extends AppCompatActivity {
 
+    private float candStar, callStar, amethStar;
+    private RatingBar cubeStar;
+    private Button back;
+    private Bundle extras;
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cube);
+        cubeStar = findViewById(R.id.cubeBar);
+        back = findViewById(R.id.back);
+        bundleGet();
 
-        final RatingBar cubeStar = findViewById(R.id.cubeBar);
-        final Button back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("cubeStar", cubeStar.getRating());
+                //also acts as bundleSet() for rating bar state return via bundles
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                extras = new Bundle();
+                extras.putFloat("cubeStar", cubeStar.getRating());
+                extras.putFloat("candStar", candStar);
+                extras.putFloat("callStar", callStar);
+                extras.putFloat("amethStar", amethStar);
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         });
     }
 
+    private void bundleGet() {
+        extras = getIntent().getExtras();
+        if (extras != null) { //If Papa's got a brand new bag
+            cubeStar.setRating(extras.getFloat("cubeStar"));
+            candStar = extras.getFloat("candStar");
+            callStar = extras.getFloat("callStar");
+            amethStar = extras.getFloat("amethStar");
+        }
+    }
 }
 

@@ -12,18 +12,27 @@ import android.widget.RatingBar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private RatingBar cubeStar, candStar, callStar, amethStar;
+    private Intent intent;
+    private Bundle extras;
+    private ImageView cube, cand, call, ameth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        cubeStar = findViewById(R.id.cubeStar);
+        candStar = findViewById(R.id.candStar);
+        callStar = findViewById(R.id.callStar);
+        amethStar = findViewById(R.id.amethStar);
+
         //version checker runs first
         checkVersion();
         //Implement onClick listeners for IMGs
         onImgClick();
         //Deal with bundle if returning
-        bundleStuff();
+        bundleGet();
     }
 
     private void checkVersion() {
@@ -48,54 +57,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void onImgClick() {
-        final ImageView cube = findViewById(R.id.imvCube);
-        cube.setOnClickListener(this);
-        final ImageView candle = findViewById(R.id.imvCand);
-        candle.setOnClickListener(this);
-        final ImageView call = findViewById(R.id.imvCall);
-        call.setOnClickListener(this);
-        final ImageView ameth = findViewById(R.id.ameth);
-        ameth.setOnClickListener(this);
+        cube = findViewById(R.id.imvCube);
+            cube.setOnClickListener(this);
+        cand = findViewById(R.id.imvCand);
+            cand.setOnClickListener(this);
+        call = findViewById(R.id.imvCall);
+            call.setOnClickListener(this);
+        ameth = findViewById(R.id.ameth);
+            ameth.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        extras = new Bundle();
         if (v.getId() == R.id.imvCube) {
-            startActivity(new Intent(this, cubeActivity.class));
+            intent = new Intent(getApplicationContext(), cubeActivity.class);;
         } else if (v.getId() == R.id.imvCand) {
-            startActivity(new Intent(this, candleActivity.class));
+            intent = new Intent(getApplicationContext(), candleActivity.class);
         } else if (v.getId() == R.id.imvCall) {
-            startActivity(new Intent(this, callActivity.class));
-        } else if (v.getId() == R.id.ameth) {
-            startActivity(new Intent(this, amethActivity.class));
+            intent = new Intent(getApplicationContext(), callActivity.class);
+        } else {
+            intent = new Intent(getApplicationContext(), amethActivity.class);
         }
+        extras.putFloat("cubeStar", cubeStar.getRating());
+        extras.putFloat("candStar", candStar.getRating());
+        extras.putFloat("callStar", callStar.getRating());
+        extras.putFloat("amethStar", amethStar.getRating());
+        intent.putExtras(extras);
+        startActivity(intent);
     }
 
-    private void bundleStuff() {
-        Bundle extras = getIntent().getExtras();
+    private void bundleGet() {
+        //Papa's got a brand new bag
+        extras = getIntent().getExtras();
+        //if extras exists
         if (extras != null) {
-            if (extras.getFloat("cubeStar") != 0) {
-                RatingBar cStar = findViewById(R.id.cubeStar);
-                cStar.setRating(extras.getFloat("cubeStar"));
-            }
-
-            if (extras.getFloat("candStar") != 0) {
-                RatingBar candStar = findViewById(R.id.candStar);
-                candStar.setRating(extras.getFloat("candStar"));
-            }
-
-            if (extras.getFloat("callStar") != 0) {
-                RatingBar callStar = findViewById(R.id.callStar);
-                callStar.setRating(extras.getFloat("callStar"));
-            }
-
-            if (extras.getFloat("amethStar") != 0) {
-                RatingBar amethStar = findViewById(R.id.amethStar);
-                amethStar.setRating(extras.getFloat("amethStar"));
-            }
+            cubeStar.setRating(extras.getFloat("cubeStar"));
+            candStar.setRating(extras.getFloat("candStar"));
+            callStar.setRating(extras.getFloat("callStar"));
+            amethStar.setRating(extras.getFloat("amethStar"));
         }
     }
 
+    //Not sure if save/restor is functioning yet, or how to properly test
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -132,4 +136,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ameth.setRating(savedInstanceState.getFloat("r1"));
         }
     }
+
 }
+
